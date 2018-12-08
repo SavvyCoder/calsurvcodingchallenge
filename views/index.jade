@@ -3,3 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  h2 Routes are as follows: 
+  ul
+    li
+      /movies/year/:year
+    li
+      /movies/genre/:genre
+    li
+      /movies/recent/top100
+    li
+      /movies/genre/:genre/:year/top100
+  h3 Thanks for stopping by!

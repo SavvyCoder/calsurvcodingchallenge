@@ -57,7 +57,43 @@ function getMoviesFromGenre(req, res, next) {
     });
 }
 
+function getBestFromLastFiveYears(req, res, next) {
+    var five_years_ago = (new Date()).getFullYear() - 5; 
+    db.any('SELECT * FROM titles JOIN ratings ON titles.tconst = ratings.tconst WHERE startYear >= $1 AND numVotes > 200 ORDER BY averageRating DESC LIMIT 100', five_years_ago)
+    .then( data => {
+        res.status(200)
+        .json({
+            status: 'success',
+            data: data,
+            message: "Retrieved (top 100) best titles from last 5 years"
+        });
+    })
+    .catch(err => {
+        return next(err); 
+    });
+}
+
+function getBest90sComedy(req, res, next) {
+    var decade = parseInt(req.params.year); 
+    var decade_end = decade + 10;
+    var genre = req.params.genre.charAt(0).toUpperCase();
+    db.any('SELECT * FROM titles JOIN ratings ON titles.tconst = ratings.tconst WHERE startYear >= $1 AND startYear <= $2 AND genres LIKE \'%$3#%\' AND numVotes > 200 ORDER BY averageRating DESC LIMIT 100', [decade, decade_end, genre])
+    .then( data => {
+        res.status(200)
+        .json({
+            status: 'success',
+            data: data,
+            message: "Retrieved (top 100) best titles from specified decade"
+        });
+    })
+    .catch(err => {
+        return next(err); 
+    });
+}
+
 module.exports = {
   getAllMoviesFromYear: getAllMoviesFromYear,
-  getMoviesFromGenre: getMoviesFromGenre
+  getMoviesFromGenre: getMoviesFromGenre,
+  getBestFromLastFiveYears: getBestFromLastFiveYears,
+  getBest90sComedy: getBest90sComedy
 };
