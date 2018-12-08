@@ -5,7 +5,7 @@ var db = require('../queries');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'CalSurvCodingChallenge' });
 });
 
 router.get('/movies/year/:year', db.getAllMoviesFromYear);

@@ -35,7 +35,7 @@ function getAllMoviesFromYear(req, res, next) {
 }
 
 function getMoviesFromGenre(req, res, next) {
-    var genre = req.params.genre; 
+    var genre = req.params.genre ? req.params.genre.charAt(0).toUpperCase() : ""; 
     var year = parseInt(req.query.year);
     var sort = req.query.sort;
     var stringQuery = "SELECT * FROM titles";
