@@ -13,6 +13,6 @@ router.get('/', function(req, res, next) {
 router.get('/movies/year/:year', db.getAllMoviesFromYear);
 router.get('/movies/genre/:genre', db.getMoviesFromGenre);
 router.get('/movies/recent/top100', db.getBestFromLastFiveYears);
-router.get('/movies/genre/:genre/:year/top100', db.getBest90sComedy);
+router.get('/movies/genre/:genre/:year/decade/top100', db.getBestFromDecade);
 
 module.exports = router;

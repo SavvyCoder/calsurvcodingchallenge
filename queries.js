@@ -73,7 +73,7 @@ function getBestFromLastFiveYears(req, res, next) {
     });
 }
 
-function getBest90sComedy(req, res, next) {
+function getBestFromDecade(req, res, next) {
     var decade = parseInt(req.params.year); 
     var decade_end = decade + 10;
     var genre = req.params.genre.charAt(0).toUpperCase();
@@ -95,5 +95,5 @@ module.exports = {
   getAllMoviesFromYear: getAllMoviesFromYear,
   getMoviesFromGenre: getMoviesFromGenre,
   getBestFromLastFiveYears: getBestFromLastFiveYears,
-  getBest90sComedy: getBest90sComedy
+  getBestFromDecade: getBestFromDecade
 };
